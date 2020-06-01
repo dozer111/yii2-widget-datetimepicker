@@ -37,6 +37,7 @@
         factory(jQuery);
 
 }(function ($, undefined) {
+
     // Add ECMA262-5 Array methods if not supported natively (IE8)
     if (!('indexOf' in Array.prototype)) {
         Array.prototype.indexOf = function (find, i) {
@@ -359,8 +360,7 @@
                         keydown: $.proxy(this.keydown, this)
                     }]
                 ];
-            }
-            else if (this.component && this.hasInput) { // component: input + button
+            } else if (this.component && this.hasInput) { // component: input + button
                 this._events = [
                     // For components that are not readonly, allow keyboard nav
                     [this.element.find('input'), {
@@ -378,11 +378,9 @@
                         {click: $.proxy(this.reset, this)}
                     ]);
                 }
-            }
-            else if (this.element.is('div')) {  // inline datetimepicker
+            } else if (this.element.is('div')) {  // inline datetimepicker
                 this.isInline = true;
-            }
-            else {
+            } else {
                 this._events = [
                     [this.element, {
                         click: $.proxy(this.show, this)
@@ -1303,18 +1301,9 @@
         },
 
         keydown: function (e) {
-            if (this.picker.is(':not(:visible)')) {
-                if (e.keyCode === 27) // allow escape to hide and re-show picker
-                    this.show();
-                return;
-            }
             var dateChanged = false,
                 dir, newDate, newViewDate;
             switch (e.keyCode) {
-                case 27: // escape
-                    this.hide();
-                    e.preventDefault();
-                    break;
                 case 37: // left
                 case 39: // right
                     if (!this.keyboardNavigation) break;
@@ -1390,19 +1379,12 @@
                         dateChanged = true;
                     }
                     break;
+                case 27:
                 case 13: // enter
-                    if (this.viewMode !== 0) {
-                        var oldViewMode = this.viewMode;
-                        this.showMode(-1);
-                        this.fill();
-                        if (oldViewMode === this.viewMode && this.autoclose) {
-                            this.hide();
-                        }
-                    } else {
-                        this.fill();
-                        if (this.autoclose) {
-                            this.hide();
-                        }
+                    this.fill();
+                    if (this.autoclose) {
+                        this.hide();
+                        $('body').trigger('bootstrapDatepickerSpecKeyPressed');
                     }
                     e.preventDefault();
                     break;
@@ -1762,8 +1744,7 @@
 
                 if (dates[language].meridiem.length === 2) {
                     val.H = (val.h % 12 === 0 ? 12 : val.h % 12);
-                }
-                else {
+                } else {
                     val.H = val.h;
                 }
                 val.HH = (val.H < 10 ? '0' : '') + val.H;
@@ -1851,24 +1832,24 @@
             return viewMode;
         },
         headTemplate: '<thead>' +
-        '<tr>' +
-        '<th class="prev"><i class="{iconType} {leftArrow}"/></th>' +
-        '<th colspan="5" class="switch"></th>' +
-        '<th class="next"><i class="{iconType} {rightArrow}"/></th>' +
-        '</tr>' +
-        '</thead>',
+            '<tr>' +
+            '<th class="prev"><i class="{iconType} {leftArrow}"/></th>' +
+            '<th colspan="5" class="switch"></th>' +
+            '<th class="next"><i class="{iconType} {rightArrow}"/></th>' +
+            '</tr>' +
+            '</thead>',
         headTemplateV3: '<thead>' +
-        '<tr>' +
-        '<th class="prev"><span class="{iconType} {leftArrow}"></span> </th>' +
-        '<th colspan="5" class="switch"></th>' +
-        '<th class="next"><span class="{iconType} {rightArrow}"></span> </th>' +
-        '</tr>' +
-        '</thead>',
+            '<tr>' +
+            '<th class="prev"><span class="{iconType} {leftArrow}"></span> </th>' +
+            '<th colspan="5" class="switch"></th>' +
+            '<th class="next"><span class="{iconType} {rightArrow}"></span> </th>' +
+            '</tr>' +
+            '</thead>',
         contTemplate: '<tbody><tr><td colspan="7"></td></tr></tbody>',
         footTemplate: '<tfoot>' +
-        '<tr><th colspan="7" class="today"></th></tr>' +
-        '<tr><th colspan="7" class="clear"></th></tr>' +
-        '</tfoot>'
+            '<tr><th colspan="7" class="today"></th></tr>' +
+            '<tr><th colspan="7" class="clear"></th></tr>' +
+            '</tfoot>'
     };
     DPGlobal.template = '<div class="datetimepicker">' +
         '<div class="datetimepicker-minutes">' +
