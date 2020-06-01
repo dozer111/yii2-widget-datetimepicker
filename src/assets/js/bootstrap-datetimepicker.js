@@ -1380,6 +1380,13 @@
                     }
                     break;
                 case 27:
+                    this.fill();
+                    if (this.autoclose) {
+                        this.hide();
+                        $('body').trigger('bootstrapDatepickerSpecKeyPressed2');
+                    }
+                    e.preventDefault();
+                    break;
                 case 13: // enter
                     this.fill();
                     if (this.autoclose) {
