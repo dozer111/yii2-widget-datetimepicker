@@ -1304,81 +1304,82 @@
             var dateChanged = false,
                 dir, newDate, newViewDate;
             switch (e.keyCode) {
-                case 37: // left
-                case 39: // right
-                    if (!this.keyboardNavigation) break;
-                    dir = e.keyCode === 37 ? -1 : 1;
-                    var viewMode = this.viewMode;
-                    if (e.ctrlKey) {
-                        viewMode += 2;
-                    } else if (e.shiftKey) {
-                        viewMode += 1;
-                    }
-                    if (viewMode === 4) {
-                        newDate = this.moveYear(this.date, dir);
-                        newViewDate = this.moveYear(this.viewDate, dir);
-                    } else if (viewMode === 3) {
-                        newDate = this.moveMonth(this.date, dir);
-                        newViewDate = this.moveMonth(this.viewDate, dir);
-                    } else if (viewMode === 2) {
-                        newDate = this.moveDate(this.date, dir);
-                        newViewDate = this.moveDate(this.viewDate, dir);
-                    } else if (viewMode === 1) {
-                        newDate = this.moveHour(this.date, dir);
-                        newViewDate = this.moveHour(this.viewDate, dir);
-                    } else if (viewMode === 0) {
-                        newDate = this.moveMinute(this.date, dir);
-                        newViewDate = this.moveMinute(this.viewDate, dir);
-                    }
-                    if (this.dateWithinRange(newDate)) {
-                        this.date = newDate;
-                        this.viewDate = newViewDate;
-                        this.setValue();
-                        this.update();
-                        e.preventDefault();
-                        dateChanged = true;
-                    }
-                    break;
-                case 38: // up
-                case 40: // down
-                    if (!this.keyboardNavigation) break;
-                    dir = e.keyCode === 38 ? -1 : 1;
-                    viewMode = this.viewMode;
-                    if (e.ctrlKey) {
-                        viewMode += 2;
-                    } else if (e.shiftKey) {
-                        viewMode += 1;
-                    }
-                    if (viewMode === 4) {
-                        newDate = this.moveYear(this.date, dir);
-                        newViewDate = this.moveYear(this.viewDate, dir);
-                    } else if (viewMode === 3) {
-                        newDate = this.moveMonth(this.date, dir);
-                        newViewDate = this.moveMonth(this.viewDate, dir);
-                    } else if (viewMode === 2) {
-                        newDate = this.moveDate(this.date, dir * 7);
-                        newViewDate = this.moveDate(this.viewDate, dir * 7);
-                    } else if (viewMode === 1) {
-                        if (this.showMeridian) {
-                            newDate = this.moveHour(this.date, dir * 6);
-                            newViewDate = this.moveHour(this.viewDate, dir * 6);
-                        } else {
-                            newDate = this.moveHour(this.date, dir * 4);
-                            newViewDate = this.moveHour(this.viewDate, dir * 4);
-                        }
-                    } else if (viewMode === 0) {
-                        newDate = this.moveMinute(this.date, dir * 4);
-                        newViewDate = this.moveMinute(this.viewDate, dir * 4);
-                    }
-                    if (this.dateWithinRange(newDate)) {
-                        this.date = newDate;
-                        this.viewDate = newViewDate;
-                        this.setValue();
-                        this.update();
-                        e.preventDefault();
-                        dateChanged = true;
-                    }
-                    break;
+                // no need for now
+                // case 37: // left
+                // case 39: // right
+                //     if (!this.keyboardNavigation) break;
+                //     dir = e.keyCode === 37 ? -1 : 1;
+                //     var viewMode = this.viewMode;
+                //     if (e.ctrlKey) {
+                //         viewMode += 2;
+                //     } else if (e.shiftKey) {
+                //         viewMode += 1;
+                //     }
+                //     if (viewMode === 4) {
+                //         newDate = this.moveYear(this.date, dir);
+                //         newViewDate = this.moveYear(this.viewDate, dir);
+                //     } else if (viewMode === 3) {
+                //         newDate = this.moveMonth(this.date, dir);
+                //         newViewDate = this.moveMonth(this.viewDate, dir);
+                //     } else if (viewMode === 2) {
+                //         newDate = this.moveDate(this.date, dir);
+                //         newViewDate = this.moveDate(this.viewDate, dir);
+                //     } else if (viewMode === 1) {
+                //         newDate = this.moveHour(this.date, dir);
+                //         newViewDate = this.moveHour(this.viewDate, dir);
+                //     } else if (viewMode === 0) {
+                //         newDate = this.moveMinute(this.date, dir);
+                //         newViewDate = this.moveMinute(this.viewDate, dir);
+                //     }
+                //     if (this.dateWithinRange(newDate)) {
+                //         this.date = newDate;
+                //         this.viewDate = newViewDate;
+                //         this.setValue();
+                //         this.update();
+                //         e.preventDefault();
+                //         dateChanged = true;
+                //     }
+                //     break;
+                // case 38: // up
+                // case 40: // down
+                //     if (!this.keyboardNavigation) break;
+                //     dir = e.keyCode === 38 ? -1 : 1;
+                //     viewMode = this.viewMode;
+                //     if (e.ctrlKey) {
+                //         viewMode += 2;
+                //     } else if (e.shiftKey) {
+                //         viewMode += 1;
+                //     }
+                //     if (viewMode === 4) {
+                //         newDate = this.moveYear(this.date, dir);
+                //         newViewDate = this.moveYear(this.viewDate, dir);
+                //     } else if (viewMode === 3) {
+                //         newDate = this.moveMonth(this.date, dir);
+                //         newViewDate = this.moveMonth(this.viewDate, dir);
+                //     } else if (viewMode === 2) {
+                //         newDate = this.moveDate(this.date, dir * 7);
+                //         newViewDate = this.moveDate(this.viewDate, dir * 7);
+                //     } else if (viewMode === 1) {
+                //         if (this.showMeridian) {
+                //             newDate = this.moveHour(this.date, dir * 6);
+                //             newViewDate = this.moveHour(this.viewDate, dir * 6);
+                //         } else {
+                //             newDate = this.moveHour(this.date, dir * 4);
+                //             newViewDate = this.moveHour(this.viewDate, dir * 4);
+                //         }
+                //     } else if (viewMode === 0) {
+                //         newDate = this.moveMinute(this.date, dir * 4);
+                //         newViewDate = this.moveMinute(this.viewDate, dir * 4);
+                //     }
+                //     if (this.dateWithinRange(newDate)) {
+                //         this.date = newDate;
+                //         this.viewDate = newViewDate;
+                //         this.setValue();
+                //         this.update();
+                //         e.preventDefault();
+                //         dateChanged = true;
+                //     }
+                //     break;
                 case 27:
                     this.fill();
                     if (this.autoclose) {
