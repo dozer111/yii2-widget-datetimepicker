@@ -654,12 +654,9 @@
 
             // for BHM, we need to show datepicker behind help-block
             let inputHelpBlock = this.element.closest('.form-group').find('.help-block');
-            let DEFAUTL_MOVEDOWN_ON_ERROR = 27;
             if (inputHelpBlock.is(':visible')) {
-                let additionalMargin = new Number(inputHelpBlock.attr('data-datepicker-movedown'));
-                top += additionalMargin > 0 ? additionalMargin : DEFAUTL_MOVEDOWN_ON_ERROR;
+                top += inputHelpBlock.height()+7;
             }
-
 
             this.picker.css({
                 top: top,
